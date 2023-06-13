@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const handleLoginApi = (userEmail, userPassword) => {
-    return axios.post('http://localhost:8080/api/login', { email: userEmail, password: userPassword });
+    return axios.post('/api/login', { email: userEmail, password: userPassword });
 }
 
-export { handleLoginApi }
+const get_all_users = (inputId) => {
+    return axios.get(`/api/get-list-users?id=${inputId}`);
+}
+
+export { handleLoginApi, get_all_users }

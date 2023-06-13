@@ -32,8 +32,24 @@ class Login extends Component {
     }
 
     handleLogin = async () => {
-        console.log('username: ', this.state.username);
-        await handleLoginApi(this.state.username, this.state.password);
+        try {
+            let data = await handleLoginApi(this.state.username, this.state.password);
+            
+            if (data && data.data.errCode !== 0) {
+                this.setState({
+                    errMassage: data.data.errMessage
+                })
+            }
+            if (data && data.data.errCode === 0) {
+                this.props.userLoginSuccess(data.config.data);
+            }
+        } catch (e) {
+            console.log(e);
+            // this.setState({
+            //     errMassage: e.response.data.errMessage
+            // })
+        }
+        
     }
 
     handleShowHidePassWord = () => {
@@ -45,7 +61,8 @@ class Login extends Component {
     render() {
         
         return (
-            <div className='login-container'>
+            <div className='main-login-container'>
+                <div className='login-container'>
                 <div id="loginform">
                     <h2 id="headerTitle">Login</h2>
                     <div>
@@ -57,7 +74,8 @@ class Login extends Component {
                             <label>Password</label>
                             <input type={this.state.isShow ? 'text': 'password'} placeholder="Enter your password" value={this.state.password} onChange={(event) => this.handlePassword(event)} />
                             <span className='showPassword' onClick={() => this.handleShowHidePassWord()}><i class={this.state.isShow ? 'far fa-eye-slash': 'fas fa-eye'}></i></span>
-                        </div>  
+                        </div>
+                        <div className="err">{this.state.errMassage}</div>
                         <div id="button" className="row">
                             <button onClick={() => this.handleLogin()}>Login</button>
                         </div>
@@ -76,6 +94,7 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
+            </div>
         )
     }
 }
@@ -89,8 +108,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
     };
 };
 

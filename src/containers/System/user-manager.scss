@@ -1,0 +1,42 @@
+#userManager {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #userManager td, #userManager th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #userManager tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #userManager tr:hover {background-color: #ddd;}
+  
+  #userManager th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+.users-container {
+    padding: 0 20px;
+}
+
+#userManager .button {
+  border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 50%;
+    background: #0071ba;
+    padding: 3px;
+    font-size: 15px;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    &.button-delete {
+      background: #f44336;
+    }
+}
