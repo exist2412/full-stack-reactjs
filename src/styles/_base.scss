@@ -83,8 +83,8 @@
   .modal-dialog {
     .modal-content {
       .modal-header {
-        padding: 0 10px;
-        height: 35px;
+        padding: 0 20px;
+        height: 60px;
         background-color: $colormain;
         color: $common-text-color;
         .modal-title {
@@ -99,6 +99,12 @@
             line-height: 35px;
             font-size: $base-size + 2px;
           }
+        }
+        .close {
+          color: #fff;
+          border: none;
+          background: none;
+          font-size: 30px;
         }
       }
     }
