@@ -73,7 +73,7 @@ class Login extends Component {
                         <div className="row position-relative">
                             <label>Password</label>
                             <input type={this.state.isShow ? 'text': 'password'} placeholder="Enter your password" value={this.state.password} onChange={(event) => this.handlePassword(event)} />
-                            <span className='showPassword' onClick={() => this.handleShowHidePassWord()}><i class={this.state.isShow ? 'far fa-eye-slash': 'fas fa-eye'}></i></span>
+                            <span className='showPassword' onClick={() => this.handleShowHidePassWord()}><i className={this.state.isShow ? 'far fa-eye-slash': 'fas fa-eye'}></i></span>
                         </div>
                         <div className="err">{this.state.errMassage}</div>
                         <div id="button" className="row">

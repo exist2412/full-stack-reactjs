@@ -5,6 +5,7 @@
     white-space: pre-wrap;
     box-shadow: 0 0 5px 5px $box-shadow-color;
     -webkit-box-shadow: 0 0 5px 5px $box-shadow-color;
+    background: #000;
 
     &.Toastify__toast--success {
       background: $common-green;
@@ -23,12 +24,9 @@
     }
 
     .toast-close {
-      position: absolute;
-      right: 10px;
-      top:10px;
+      padding: 5px;
       color: $common-text-color;
       font-size: $base-size;
-      padding: 0;
       cursor: pointer;
       background: transparent;
       border: 0;

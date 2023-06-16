@@ -8,4 +8,20 @@ const get_all_users = (inputId) => {
     return axios.get(`/api/get-list-users?id=${inputId}`);
 }
 
-export { handleLoginApi, get_all_users }
+const createUser = (data) => {
+    return axios.post('/api/create-user', 
+        {
+            email: data.email, 
+            password: data.password, 
+            firstName: data.firstName, 
+            lastName: data.lastName, 
+            phone: data.phone, 
+            address: data.address,
+            positionId: data.positionId,
+            roleId: data.roleId,
+            gender: data.gender
+        }
+    );
+}
+
+export { handleLoginApi, get_all_users, createUser }

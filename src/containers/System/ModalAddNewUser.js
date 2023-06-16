@@ -15,9 +15,9 @@ class ModalAddNewUser extends Component {
             lastName: '',
             phone: '',
             address: '',
-            positionId: '',
-            gender: '',
-            roleId: ''
+            positionId: 'P0',
+            gender: '0',
+            roleId: 'R1'
         }
     }
 
@@ -28,6 +28,49 @@ class ModalAddNewUser extends Component {
         this.props.toggle();
     }   
 
+    handleOnChangeField = (event, name) => {
+      // good code
+      let mapState = {...this.state};
+      mapState[name] = event.target.value;
+      this.setState({
+        ...mapState
+      });
+    }
+
+    handleAddNewUser = () => {
+      let isValid = this.checkValidate();
+      if (isValid === true) {
+        // call api
+        this.props.createNewUser(this.state);
+        // DELETE VALUE
+      }
+      if (this.props.isClear === true) {
+        this.setState({
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          address: '',
+          positionId: 'P0',
+          gender: '0',
+          roleId: 'R1'
+        })
+      }
+    }
+
+    checkValidate = () => {
+      let isValid = true;
+      let arrField = ['email','password','firstName','lastName','phone','address'];
+      for(let i = 0; i < arrField.length; i ++) {
+        if (!this.state[arrField[i]]) {
+          isValid = false;
+          alert(`Missing: ${arrField[i]}`);
+          break;
+        }
+      }
+      return isValid;
+    }
 
     render() {
         return (
@@ -47,6 +90,8 @@ class ModalAddNewUser extends Component {
                               name="email"
                               placeholder="Tài khoản đăng nhập"
                               type="email"
+                              onChange={(event) => {this.handleOnChangeField(event, "email")}}
+                              value={this.state.email}
                             />
                           </FormGroup>
                         </Col>
@@ -60,6 +105,8 @@ class ModalAddNewUser extends Component {
                               name="password"
                               placeholder="Mật khẩu"
                               type="password"
+                              onChange={(event) => {this.handleOnChangeField(event, "password")}}
+                              value={this.state.password}
                             />
                           </FormGroup>
                         </Col>
@@ -75,6 +122,8 @@ class ModalAddNewUser extends Component {
                               name="lastName"
                               placeholder="Họ & chữ lót"
                               type="text"
+                              onChange={(event) => {this.handleOnChangeField(event, "lastName")}}
+                              value={this.state.lastName}
                             />
                           </FormGroup>
                         </Col>
@@ -88,6 +137,8 @@ class ModalAddNewUser extends Component {
                               name="firstName"
                               placeholder="Tên người dùng"
                               type="text"
+                              onChange={(event) => {this.handleOnChangeField(event, "firstName")}}
+                              value={this.state.firstName}
                             />
                           </FormGroup>
                         </Col>
@@ -101,6 +152,8 @@ class ModalAddNewUser extends Component {
                               name="phone"
                               placeholder="Số điện thoại"
                               type="text"
+                              onChange={(event) => {this.handleOnChangeField(event, "phone")}}
+                              value={this.state.phone}
                             />
                           </FormGroup>
                         </Col>
@@ -113,6 +166,8 @@ class ModalAddNewUser extends Component {
                           id="exampleAddress"
                           name="address"
                           placeholder=""
+                          onChange={(event) => {this.handleOnChangeField(event, "address")}}
+                          value={this.state.address}
                         />
                       </FormGroup>
                       <Row>
@@ -123,9 +178,11 @@ class ModalAddNewUser extends Component {
                             </Label>
                             <Input
                               id="examplePosition"
-                              name="position"
+                              name="positionId"
                               type="select"
                               className='form-select'
+                              onChange={(event) => {this.handleOnChangeField(event, "positionId")}}
+                              value={this.state.positionId}
                             >
                               <option value="P0">
                                 Bác sĩ
@@ -152,9 +209,10 @@ class ModalAddNewUser extends Component {
                             </Label>
                             <Input
                               id="exampleRole"
-                              name="role"
+                              name="roleId"
                               type="select"
                               className='form-select'
+                              onChange={(event) => {this.handleOnChangeField(event, "roleId")}}
                             >
                               <option value="R1">
                                 Quản trị viên
@@ -178,6 +236,7 @@ class ModalAddNewUser extends Component {
                               name="gender"
                               type="select"
                               className='form-select'
+                              onChange={(event) => {this.handleOnChangeField(event, "gender")}}
                             >
                               <option value="0">
                                 Nam
@@ -185,7 +244,7 @@ class ModalAddNewUser extends Component {
                               <option value="1">
                                 Nữ
                               </option>
-                              <option>
+                              <option value="2">
                                 Khác
                               </option>
                             </Input>
@@ -194,7 +253,7 @@ class ModalAddNewUser extends Component {
                       </Row>
                     </ModalBody>
                     <ModalFooter>
-                    <Button className='px-4' color="primary" onClick={() => { this.toggle()} }>
+                    <Button className='px-4' color="primary" onClick={() => { this.handleAddNewUser()} }>
                         Lưu
                     </Button>{' '}
                     <Button className='px-4' color="secondary" onClick={() => { this.toggle()} }>

@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import "./user-manager.scss";
-import { get_all_users} from '../../services/userServices';
+import { get_all_users, createUser } from '../../services/userServices';
 import ModalAddNewUser from './ModalAddNewUser';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 class UserManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             arrUsers: [],
-            isOpen: false
+            isOpen: false,
+            isClear: false
         }
     }
 
     async componentDidMount() {
+        await this.getAllUsers();
+    }
+
+    getAllUsers = async () => {
         let res = await get_all_users('all');
         if (res && res.status === 200) {
             this.setState({
@@ -23,10 +30,46 @@ class UserManage extends Component {
         }
     }
 
-    AddNewUser = () => {
+    callAddNewUser = () => {
         this.setState({
-            isOpen: true
+            isOpen: true,
         });
+    }
+
+    AddNewUser = async (data, message) => {
+        try {
+            let res = await createUser(data);
+            console.log(res)
+            if(res && res.data.result.errCode === 0 && res.status === 200) {
+                await this.getAllUsers();
+                this.setState({
+                    isOpen: false,
+                    isClear: true
+                });
+            } else {
+                this.setState({
+                    isClear: false
+                });
+            }
+            // this.setState({
+            //     isClear: false
+            // });
+            toast(res.data.result.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            this.setState({
+                isClear: false
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     toggleAddUserModal = () => {
@@ -34,6 +77,7 @@ class UserManage extends Component {
             isOpen: !this.state.isOpen
         });
     }
+
 
     render() {
         let arrUsers = this.state.arrUsers;
@@ -43,21 +87,23 @@ class UserManage extends Component {
                 <div className='text-right mb-3'>
                     <button 
                         className='btn-default btn-primary px-4 py-2'
-                        onClick={() => this.AddNewUser()}
+                        onClick={() => this.callAddNewUser()}
                     >
                         <i className="fas fa-user-plus"></i> Thêm mới
                     </button>
                 </div>
-                <ModalAddNewUser isOpen={this.state.isOpen} toggle={this.toggleAddUserModal} />
+                <ModalAddNewUser key={'modalNewUser'} createNewUser={this.AddNewUser} isOpen={this.state.isOpen} isClear={this.state.isClear} toggle={this.toggleAddUserModal} />
                 <table id="userManager">
-                    <tr>
-                        <th>Email</th>
-                        <th>Tên người dùng</th>
-                        <th>Điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Action</th>
-                    </tr>
-                    
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Tên người dùng</th>
+                            <th>Điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     { arrUsers && arrUsers.map((item, index) => {
                         return(
                             <>
@@ -76,7 +122,7 @@ class UserManage extends Component {
                     })
                         
                     }
-                    
+                    </tbody>
                 </table>
             </div>
         );
