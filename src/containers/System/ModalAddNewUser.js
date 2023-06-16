@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form,FormGroup,Label,Row,Col,Input } from 'reactstrap';
@@ -43,19 +42,6 @@ class ModalAddNewUser extends Component {
         // call api
         this.props.createNewUser(this.state);
         // DELETE VALUE
-      }
-      if (this.props.isClear === true) {
-        this.setState({
-          email: '',
-          password: '',
-          firstName: '',
-          lastName: '',
-          phone: '',
-          address: '',
-          positionId: 'P0',
-          gender: '0',
-          roleId: 'R1'
-        })
       }
     }
 

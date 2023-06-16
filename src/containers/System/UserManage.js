@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import "./user-manager.scss";
-import { get_all_users, createUser } from '../../services/userServices';
-import ModalAddNewUser from './ModalAddNewUser';
+import { get_all_users, createUser, handleDeleteUser } from '../../services/userServices';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import ModalAddNewUser from './ModalAddNewUser';
+import ModalDeleteUser from './ModalDeleteUser';
+import { add } from 'lodash';
+
 class UserManage extends Component {
 
     constructor(props) {
@@ -13,7 +16,8 @@ class UserManage extends Component {
         this.state = {
             arrUsers: [],
             isOpen: false,
-            isClear: false
+            modalDelete: false,
+            id: ''
         }
     }
 
@@ -36,24 +40,47 @@ class UserManage extends Component {
         });
     }
 
+    callDeleteUser = (item) => {
+        this.setState({
+            modalDelete: true,
+            id: item.id
+        });
+    }
+
+    deleteUser = async (id) => {
+        try {
+            let res = await handleDeleteUser(id);
+            if(res && res.status === 200) {
+                await this.getAllUsers();
+                this.setState({
+                    modalDelete: false
+                });
+            }
+            toast(res.data.massage, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } catch (e) {
+           console.log(e); 
+        }
+    }
+
     AddNewUser = async (data, message) => {
         try {
             let res = await createUser(data);
-            console.log(res)
+            
             if(res && res.data.result.errCode === 0 && res.status === 200) {
                 await this.getAllUsers();
                 this.setState({
-                    isOpen: false,
-                    isClear: true
-                });
-            } else {
-                this.setState({
-                    isClear: false
+                    isOpen: false
                 });
             }
-            // this.setState({
-            //     isClear: false
-            // });
             toast(res.data.result.message, {
                 position: "bottom-right",
                 autoClose: 5000,
@@ -74,10 +101,16 @@ class UserManage extends Component {
 
     toggleAddUserModal = () => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
         });
     }
 
+
+    toggleDeleteUserModal = () => {
+        this.setState({
+            modalDelete: !this.state.modalDelete
+        });
+    }
 
     render() {
         let arrUsers = this.state.arrUsers;
@@ -92,7 +125,19 @@ class UserManage extends Component {
                         <i className="fas fa-user-plus"></i> Thêm mới
                     </button>
                 </div>
-                <ModalAddNewUser key={'modalNewUser'} createNewUser={this.AddNewUser} isOpen={this.state.isOpen} isClear={this.state.isClear} toggle={this.toggleAddUserModal} />
+                <ModalAddNewUser 
+                    key={'modalNewUser'} 
+                    createNewUser={this.AddNewUser} 
+                    isOpen={this.state.isOpen} 
+                    toggle={this.toggleAddUserModal} 
+                />
+                <ModalDeleteUser
+                    key={'modalDeleteUser'} 
+                    modalDelete={this.state.modalDelete}
+                    toggle={this.toggleDeleteUserModal}
+                    deleteUser={this.deleteUser}
+                    id={this.state.id}
+                />
                 <table id="userManager">
                     <thead>
                         <tr>
@@ -114,7 +159,7 @@ class UserManage extends Component {
                                     <td>{item.address}</td>
                                     <td>
                                         <button className="button button-edit"><i className="fas fa-wrench"></i></button>
-                                        <button className="button button-delete"><i className="fas fa-trash-alt"></i></button>
+                                        <button className="button button-delete" onClick={() => this.callDeleteUser(item)}><i className="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </>
