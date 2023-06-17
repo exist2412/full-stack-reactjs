@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import "./user-manager.scss";
-import { get_all_users, createUser, handleDeleteUser } from '../../services/userServices';
+import { get_all_users, createUser, handleDeleteUser, editUser } from '../../services/userServices';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import ModalAddNewUser from './ModalAddNewUser';
 import ModalDeleteUser from './ModalDeleteUser';
+import ModalEditUser from './ModalEditUser';
 import { add } from 'lodash';
+import { emitter } from '../../utils/emitter';
 
 class UserManage extends Component {
 
@@ -17,6 +19,8 @@ class UserManage extends Component {
             arrUsers: [],
             isOpen: false,
             modalDelete: false,
+            modalEdit: false,
+            userEdit: {},
             id: ''
         }
     }
@@ -44,6 +48,13 @@ class UserManage extends Component {
         this.setState({
             modalDelete: true,
             id: item.id
+        });
+    }
+
+    callEditUser = (item) => {
+        this.setState({
+            modalEdit: true,
+            userEdit: item
         });
     }
 
@@ -80,6 +91,7 @@ class UserManage extends Component {
                 this.setState({
                     isOpen: false
                 });
+                emitter.emit('EVENT_CLEAR_MODAL_DATA');
             }
             toast(res.data.result.message, {
                 position: "bottom-right",
@@ -99,6 +111,31 @@ class UserManage extends Component {
         }
     }
 
+    updateUser = async (data) => {
+        try {
+            let res = await editUser(data);
+            
+            if(res && res.status === 200) {
+                await this.getAllUsers();
+                this.setState({
+                    modalEdit: false
+                });
+            }
+            toast(res.data.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     toggleAddUserModal = () => {
         this.setState({
             isOpen: !this.state.isOpen,
@@ -109,6 +146,12 @@ class UserManage extends Component {
     toggleDeleteUserModal = () => {
         this.setState({
             modalDelete: !this.state.modalDelete
+        });
+    }
+
+    toggleEditUserModal = () => {
+        this.setState({
+            modalEdit: !this.state.modalEdit
         });
     }
 
@@ -138,6 +181,15 @@ class UserManage extends Component {
                     deleteUser={this.deleteUser}
                     id={this.state.id}
                 />
+                { this.state.modalEdit === true &&
+                    <ModalEditUser
+                        key={'modalEditUser'} 
+                        modalEdit={this.state.modalEdit}
+                        toggle={this.toggleEditUserModal}
+                        user={this.state.userEdit}
+                        updateUser={this.updateUser}
+                    />
+                }
                 <table id="userManager">
                     <thead>
                         <tr>
@@ -158,7 +210,7 @@ class UserManage extends Component {
                                     <td>{item.phone}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button className="button button-edit"><i className="fas fa-wrench"></i></button>
+                                        <button className="button button-edit" onClick={() => this.callEditUser(item)}><i className="fas fa-wrench"></i></button>
                                         <button className="button button-delete" onClick={() => this.callDeleteUser(item)}><i className="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>

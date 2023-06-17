@@ -24,6 +24,12 @@ const createUser = (data) => {
     );
 }
 
+const editUser = (data) => {
+    return axios.put('/api/edit-user', 
+        { data: data }
+    );
+}
+
 const handleDeleteUser = (userId) => {
     return axios.delete(`/api/delete-user`,
         {
@@ -34,4 +40,4 @@ const handleDeleteUser = (userId) => {
     );
 }
 
-export { handleLoginApi, get_all_users, createUser, handleDeleteUser }
+export { handleLoginApi, get_all_users, createUser, handleDeleteUser, editUser }
