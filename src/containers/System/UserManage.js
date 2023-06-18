@@ -112,6 +112,7 @@ class UserManage extends Component {
     }
 
     updateUser = async (data) => {
+        
         try {
             let res = await editUser(data);
             

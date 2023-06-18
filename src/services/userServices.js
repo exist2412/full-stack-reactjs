@@ -26,7 +26,7 @@ const createUser = (data) => {
 
 const editUser = (data) => {
     return axios.put('/api/edit-user', 
-        { data: data }
+        data
     );
 }
 
