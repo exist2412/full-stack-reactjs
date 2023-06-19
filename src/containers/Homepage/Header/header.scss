@@ -1,0 +1,77 @@
+.tt-header-container {
+    padding: 20px 0;
+    .tt-left {
+        display: flex;
+        align-items: center;
+        .tt-bars {
+            font-size: 24px;
+            margin-right: 20px;
+            margin-top: 10px;
+            border: none;
+            background: none;   
+        }
+        .logo {
+            img {
+                max-width: 250px;
+            }
+            
+        }
+    }
+    .tt-header-support {
+        display: inline-block;
+        text-align: right;
+        .tt-button {
+            font-size: 16px;
+            color: #eee;
+            text-decoration: none;
+            display: inline-block;
+            padding: 7px 22px;
+            background-color: #c046ff;
+            border-radius: 2px;
+        }
+    }
+    .tt-language {
+        display: flex;
+        .tt-img {
+            margin-left: 7px;
+            cursor: pointer;
+            > img {
+                max-width: 28px;
+            }
+        }
+    }
+    .tt-center {
+        .tt-menu-box {
+            > ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                > li {
+                    margin-right: 40px;
+                    > a {
+                        text-decoration: none;
+                        color: #000;
+                        -webkit-transition: all .3s ease;
+                        -o-transition: all .3s ease;
+                        transition: all .3s ease;
+                        &:hover {
+                            color: #c046ff;
+                        }
+                        .tt-menu-box-title {
+                            display: block;
+                            font-size: 17px;
+                            font-weight: bold;
+                        }
+                        .tt-menu-box-description {
+                            font-size: 14px;
+                            color: #989898;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
