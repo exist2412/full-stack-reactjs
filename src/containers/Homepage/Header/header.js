@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import './header.scss';
 import Logo from '../../../assets/images/header/NABL_BIG-ab085fb0.png';
 import VN from '../../../assets/images/language/VN-flag.png';
@@ -14,7 +15,6 @@ class Header extends Component {
     }
 
     render() {
-        
         return (
             <div className='tt-header-container shadow-sm'>
                 <div className='container'>
@@ -31,26 +31,26 @@ class Header extends Component {
                                     <ul>
                                         <li>
                                             <a href="/">
-                                                <span className="tt-menu-box-title">Chuyên khoa</span>
-                                                <span className="tt-menu-box-description">Tìm bác sĩ theo chuyên khoa</span>
+                                                <span className="tt-menu-box-title"><FormattedMessage id="header.specialty" /></span>
+                                                <span className="tt-menu-box-description"><FormattedMessage id="header.find_doctor" /></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/">
-                                                <span className="tt-menu-box-title">Cơ sở y tế</span>
-                                                <span className="tt-menu-box-description">Chọn bệnh viện, phòng khám</span>
+                                                <span className="tt-menu-box-title"><FormattedMessage id="header.health_facility" /></span>
+                                                <span className="tt-menu-box-description"><FormattedMessage id="header.select_room" /></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/">
-                                                <span className="tt-menu-box-title">Bác sĩ</span>
-                                                <span className="tt-menu-box-description">Chọn bác sĩ</span>
+                                                <span className="tt-menu-box-title"><FormattedMessage id="header.doctor" /></span>
+                                                <span className="tt-menu-box-description"><FormattedMessage id="header.select_doctor" /></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/">
-                                                <span className="tt-menu-box-title">Gói khám</span>
-                                                <span className="tt-menu-box-description">Chọn gói khám</span>
+                                                <span className="tt-menu-box-title"><FormattedMessage id="header.package" /></span>
+                                                <span className="tt-menu-box-description"><FormattedMessage id="header.select_package" /></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -61,7 +61,7 @@ class Header extends Component {
                             <div className='d-flex align-items-center justify-content-between'>
                                 <div className="tt-header-support">
                                     <a href="/" className="tt-button">
-                                        <i className="fas fa-question-circle"></i> Hỗ trợ
+                                        <i className="fas fa-question-circle"></i> <FormattedMessage id="header.support" />
                                     </a>
                                 </div>
                                 <div className='tt-language'>
@@ -79,7 +79,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language
     };
 };
 

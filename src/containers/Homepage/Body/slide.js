@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import './body.scss';
 
 class Slide extends Component {
@@ -17,10 +18,10 @@ class Slide extends Component {
 
                 <div className="tt-home-slide-content">
                     <div className="container">
-                        <div className="title">NỀN TẢNG Y TẾ <br/>CHĂM SÓC SỨC KHỎE TOÀN DIỆN</div>
+                        <div className="title"><FormattedMessage id="slide.base" /> <br/><FormattedMessage id="slide.health_care" /></div>
                         <div className="search-bar">
                             <div className="header-search mb-3">
-                                <input type="text" className="form-control" placeholder="Nhập từ khóa" />
+                                <input type="text" className="form-control" placeholder="" />
                                 <button className="btn-search" type="button"><i className="fas fa-search"></i></button>
                             </div>
                         </div>
@@ -32,7 +33,7 @@ class Slide extends Component {
                                 <i className="fas fa-hospital-alt"></i>
                                 </div>
                                 <div className="text">
-                                    Khám chuyên khoa
+                                    <FormattedMessage id="slide.specility_exam" />
                                 </div>
                             </div>
                             <div className="option">
@@ -40,7 +41,7 @@ class Slide extends Component {
                                     <i className="fas fa-file-alt"></i>
                                 </div>
                                 <div className="text">
-                                    Khám tổng quát
+                                    <FormattedMessage id="slide.physical_exam" />
                                 </div>
                             </div>
                             <div className="option">
@@ -48,7 +49,7 @@ class Slide extends Component {
                                     <i className="fas fa-stethoscope"></i>
                                 </div>
                                 <div className="text">
-                                    Khám nha khoa
+                                    <FormattedMessage id="slide.dentai_exam" />
                                 </div>
                             </div>
                             <div className="option">
@@ -56,7 +57,7 @@ class Slide extends Component {
                                     <i className="fas fa-procedures"></i>
                                 </div>
                                 <div className="text">
-                                    Xét nghiệm y học
+                                    <FormattedMessage id="slide.medical_test" />
                                 </div>
                             </div>
                             <div className="option">
@@ -64,7 +65,7 @@ class Slide extends Component {
                                     <i className="fas fa-ambulance"></i>
                                 </div>
                                 <div className="text">
-                                    Gói phẫu thuật
+                                    <FormattedMessage id="slide.pack" />
                                 </div>
                             </div>
                             <div className="option">
@@ -72,7 +73,7 @@ class Slide extends Component {
                                     <i class="fas fa-notes-medical"></i>
                                 </div>
                                 <div className="text">
-                                    Xét nghiệm y tế
+                                    <FormattedMessage id="slide.product" />
                                 </div>
                             </div>
                         </div>
@@ -85,7 +86,8 @@ class Slide extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language
     };
 };
 

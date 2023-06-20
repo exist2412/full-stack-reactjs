@@ -116,5 +116,27 @@
             "remove-assign-fail": "Fail to unassign service package to customer",
             "sure-delete-assign": "Are you sure to unassign service package to customer?"
         }
+    },
+    "header": {
+        "specialty": "Specialty",
+        "find_doctor": "Find a doctor by specialty",
+        "health_facility": "Health facility",
+        "select_room": "Choose a hospital, clinic",
+        "doctor": "Doctor",
+        "select_doctor": "Choose a good doctor",
+        "package": "Package",
+        "select_package": "Choose a package",
+        "support": "Support"
+    },
+    "slide": {
+        "base": "MEDICAL BASE",
+        "health_care": "COMPREHENSIVE HEALTH CARE",
+        "specility_exam": "Specialized examination",
+        "physical_exam": "General examination",
+        "dentai_exam": "Dental examination",
+        "medical_test": "Medical test",
+        "pack": "Surgery pack",
+        "product": "Medical products",
+        "search": "Enter keyword"
     }
 }
