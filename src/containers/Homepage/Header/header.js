@@ -5,6 +5,8 @@ import './header.scss';
 import Logo from '../../../assets/images/header/NABL_BIG-ab085fb0.png';
 import VN from '../../../assets/images/language/VN-flag.png';
 import EN from '../../../assets/images/language/EN-flag.png';
+import { languages } from '../../../utils';
+import { setLanguage } from '../../../store/actions'
 
 class Header extends Component {
     constructor(props) {
@@ -12,6 +14,10 @@ class Header extends Component {
         this.state = {
             
         }
+    }
+
+    changeLanguage = (language) => {
+        this.props.setLanguageApp(language)
     }
 
     render() {
@@ -65,8 +71,8 @@ class Header extends Component {
                                     </a>
                                 </div>
                                 <div className='tt-language'>
-                                    <a className='tt-img' href><img src={VN} alt='Logo' /></a>
-                                    <a className='tt-img' href><img src={EN} alt='Logo' /></a>
+                                    <a className='tt-img' href onClick={() => this.changeLanguage(languages.VI)}><img src={VN} alt='Logo' /></a>
+                                    <a className='tt-img' href onClick={() => this.changeLanguage(languages.EN)}><img src={EN} alt='Logo' /></a>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+        setLanguageApp: (language) => dispatch(setLanguage(language))
     };
 };
 
