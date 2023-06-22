@@ -71,3 +71,72 @@
         }
     }
 }
+
+.tt-title {
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.attribute-item {
+    .item {
+        .image {
+            margin-bottom: 1rem;
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 200px;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        
+    }
+}
+
+.doctor-section {
+    .item {
+        border: 1px solid #eee;
+        background-color: #fff;
+        text-align: center;
+        .image {
+            padding: 25px 0;
+            height: 200px;
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: contain;
+                border-radius: 50%;
+                margin: auto;
+            }
+        }
+        h3 {
+            padding: 0 10px 10px;
+        }
+    }
+}
+
+.blog-section {
+    .item {
+        .blog-image {
+            img {
+                height: 180px;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .blog-title {
+            text-decoration:  none;
+            color: #000;
+            font-weight: 600;
+        }
+        .blog-description {
+
+        }
+    }
+}

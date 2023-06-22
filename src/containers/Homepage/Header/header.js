@@ -21,6 +21,7 @@ class Header extends Component {
     }
 
     render() {
+        let lang = this.props.language;
         return (
             <div className='tt-header-container shadow-sm'>
                 <div className='container'>
@@ -71,8 +72,8 @@ class Header extends Component {
                                     </a>
                                 </div>
                                 <div className='tt-language'>
-                                    <a className='tt-img' href onClick={() => this.changeLanguage(languages.VI)}><img src={VN} alt='Logo' /></a>
-                                    <a className='tt-img' href onClick={() => this.changeLanguage(languages.EN)}><img src={EN} alt='Logo' /></a>
+                                    <a className={lang === languages.VI ? 'tt-img active' : 'tt-img'} onClick={() => this.changeLanguage(languages.VI)}><img src={VN} alt={languages.VI} /></a>
+                                    <a className={lang === languages.EN ? 'tt-img active' : 'tt-img'} onClick={() => this.changeLanguage(languages.EN)}><img src={EN} alt={languages.EN} /></a>
                                 </div>
                             </div>
                         </div>

@@ -7,17 +7,10 @@
     background-size: cover;
     font-family: $fontmain;
     font-size: $base-size - 2px;
-    height: 100vh;
-    overflow: hidden;
 }
 
 .btn {
-    padding: 0;
-    border: none;
-    cursor: pointer;
     font-weight: 700;
-    height: 30px;
-    line-height: 30px;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -61,6 +54,14 @@
 }
 #password::placeholder { 
   font-family: $fontmain;
+}
+
+.section {
+  padding: 50px 0;
+}
+
+.bg-grey {
+  background-color: #f5f5f5;
 }
 
 .content-container {
@@ -109,4 +110,22 @@
       }
     }
   }
+}
+
+.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #fff!important;
+  background-color: #c046ff!important;
+  width: 33px;
+  height: 33px;
+}
+
+.owl-carousel .owl-nav button.owl-prev {
+  left: -20px;
+}
+
+.owl-carousel .owl-nav button.owl-next {
+  right: -20px;
 }
