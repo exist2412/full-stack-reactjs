@@ -6,7 +6,9 @@ import Speciality from './Body/speciality';
 import Facilities from './Body/facilities';
 import Doctor from './Body/doctor';
 import Blog from './Body/blog';
-
+import Footer from './Footer/footer';
+import './Body/body.scss';
+import './Footer/footer.scss';
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -84,6 +86,7 @@ class Index extends Component {
                 <Facilities options={options} />
                 <Doctor options={options} />
                 <Blog options={options_blog} />
+                <Footer />
             </div>
         )
     }

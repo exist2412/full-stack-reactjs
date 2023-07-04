@@ -1,5 +1,15 @@
 .tt-header-container {
     padding: 20px 0;
+    background-color: transparent;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    &.is-sticky {
+        position: sticky;
+        top: 0;
+        z-index: 1080;
+        background-color: #fff;
+    }
     .tt-left {
         display: flex;
         align-items: center;

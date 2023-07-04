@@ -12,7 +12,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            isSticky: false
         }
     }
 
@@ -20,10 +20,30 @@ class Header extends Component {
         this.props.setLanguageApp(language)
     }
 
+    componentDidMount = () => {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = (event) => {
+        if (window.scrollY >= 350) {
+            this.setState({
+                isSticky: true
+            })
+        } else {
+            this.setState({
+                isSticky: false
+            })
+        }
+    }
+
     render() {
         let lang = this.props.language;
         return (
-            <div className='tt-header-container shadow-sm'>
+            <div className={this.state.isSticky === true ? "tt-header-container shadow-sm is-sticky": "tt-header-container shadow-sm"}>
                 <div className='container'>
                     <div className='row gx-3 align-items-center'>
                         <div className='col-lg-3'>
