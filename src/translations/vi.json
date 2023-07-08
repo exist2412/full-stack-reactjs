@@ -27,10 +27,10 @@
     },
     "menu": {
         "system": {
-            "header": "Hệ thống",
+            "header": "Menu",
             "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
+                "header": "Dashboard",
+                "user-manage": "Quản lý người dùng",
                 "product-manage": "Quản lý gói",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },

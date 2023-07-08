@@ -11,9 +11,9 @@ class MenuGroup extends Component {
         const { name, children } = this.props;
         return (
             <li className="menu-group">
-                <div className="menu-group-name">
+                {/* <div className="menu-group-name">
                     <FormattedMessage id={name} />
-                </div>
+                </div> */}
                 <ul className="menu-list list-unstyled">
                     {children}
                 </ul>
@@ -49,7 +49,7 @@ class Menu extends Component {
                     </Fragment>
                 ) : (
                         <Link to={link} className="menu-link" onClick={onLinkClick}>
-                            <FormattedMessage id={name} />
+                            <span class="fa fa-home mr-3"></span> <FormattedMessage id={name} />
                         </Link>
                     )}
             </li>
