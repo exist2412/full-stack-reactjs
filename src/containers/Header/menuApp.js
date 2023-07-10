@@ -2,7 +2,7 @@ export const adminMenu = [
     { //hệ thống
         name: 'menu.system.header', menus: [
             {
-                name: 'menu.system.system-administrator.header',
+                name: 'menu.system.system-administrator.header', link: '/system/dashboard',
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
                 //     { name: 'menu.system.system-administrator.product-manage', link: '/system/product-manage' },
@@ -10,6 +10,7 @@ export const adminMenu = [
                 // ]
             },
             { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+            { name: 'menu.system.system-administrator.user-manage', link: '/system/user-redux' },
         ]
     },
 ];
