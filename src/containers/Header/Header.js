@@ -9,6 +9,7 @@ import { languages } from '../../utils';
 import { setLanguage } from '../../store/actions';
 import VN from '../../assets/images/language/VN-flag.png';
 import EN from '../../assets/images/language/EN-flag.png';
+import { FormattedMessage } from 'react-intl';
 
 class Header extends Component {
 
@@ -16,6 +17,7 @@ class Header extends Component {
         super(props);
         this.state = {
             isOpenSidebar: true,
+            isOpenDropdown: false
         }
     }
 
@@ -29,14 +31,34 @@ class Header extends Component {
         })
     }
 
+    toggleDropdown = () => {
+        this.setState({
+            isOpenDropdown: !this.state.isOpenDropdown,
+        })
+    }
+
     changeLanguage = (language) => {
         this.props.setLanguageApp(language)
     }
 
     render() {
-        const { processLogout } = this.props;
+        const { processLogout, userInfo } = this.props;
         let lang = this.props.language;
+        console.log()
         return (
+            <>
+            <div className='info-user-container'>
+                <div className="dropdown">
+                    <button className="btn btn-success dropdown-toggle py-2" onClick={() => this.toggleDropdown()} type="button">
+                        Hello, {userInfo.lastName ? userInfo.lastName : ''} <i class="far fa-user-circle"></i>
+                    </button>
+                    <ul className={this.state.isOpenDropdown === true ? 'dropdown-menu show' : 'dropdown-menu'}>
+                        <li><a class="dropdown-item" href="#"><FormattedMessage id="menu.system.admin.info" /></a></li>
+                        <li><a class="dropdown-item" href="#"><FormattedMessage id="menu.system.admin.schedule" /></a></li>
+                        <li><a class="dropdown-item" href="#"><FormattedMessage id="menu.system.admin.chanpage-password" /></a></li>
+                    </ul>
+                </div>
+            </div>
             <nav id='sidebar' className={this.state.isOpenSidebar === true ? '' : 'active'}>
                 <div class="custom-menu">
                     <button type="button" id="sidebarCollapse" class="btn btn-primary" onClick={() => this.toggleSidebar()}>
@@ -66,6 +88,7 @@ class Header extends Component {
                     </div>
                 </div>
             </nav>
+            </>
         );
     }
 
@@ -74,6 +97,7 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
         language: state.app.language
     };
 };

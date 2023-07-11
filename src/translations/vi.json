@@ -29,13 +29,18 @@
         "system": {
             "header": "Menu",
             "system-administrator": {
-                "header": "Dashboard",
+                "header": "Bảng điều khiển",
                 "user-manage": "Quản lý người dùng",
                 "product-manage": "Quản lý gói",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"
+            },
+            "admin": {
+                "info": "Thông tin cá nhân",
+                "schedule": "Lịch khám",
+                "chanpage-password": "Đổi mật khẩu"
             }
         }
     },

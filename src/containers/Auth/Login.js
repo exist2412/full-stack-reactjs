@@ -33,14 +33,14 @@ class Login extends Component {
     handleLogin = async () => {
         try {
             let data = await handleLoginApi(this.state.username, this.state.password);
-            
+            console.log(data)
             if (data && data.data.errCode !== 0) {
                 this.setState({
                     errMassage: data.data.errMessage
                 })
             }
             if (data && data.data.errCode === 0) {
-                this.props.userLoginSuccess(data.config.data);
+                this.props.userLoginSuccess(data.data.user);
             }
         } catch (e) {
             console.log(e);

@@ -29,13 +29,18 @@
         "system": {
             "header": "System",
             "system-administrator": {
-                "header": "System Administrator",
+                "header": "Dashboard",
                 "user-manage": "User manage",
                 "product-manage": "Package manage",
                 "register-package-group-or-account": "Register service package for group/account"
             },
             "system-parameter": {
                 "header": "System-parameter"
+            },
+            "admin": {
+                "info": "Personal information",
+                "schedule": "Examination schedule",
+                "chanpage-password": "Change Password"
             }
         }
     },

@@ -25,7 +25,7 @@ class MenuGroup extends Component {
 class Menu extends Component {
 
     render() {
-        const { name, active, link, children, onClick, hasSubMenu, onLinkClick } = this.props;
+        const { name, active, link, icon, children, onClick, hasSubMenu, onLinkClick } = this.props;
         return (
             <li className={"menu" + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
                 {hasSubMenu ? (
@@ -49,7 +49,7 @@ class Menu extends Component {
                     </Fragment>
                 ) : (
                         <Link to={link} className="menu-link" onClick={onLinkClick}>
-                            <span class="fa fa-home mr-3"></span> <FormattedMessage id={name} />
+                            <i className={icon ? icon : 'fas fa-server mr-3'}></i> <FormattedMessage id={name} />
                         </Link>
                     )}
             </li>
@@ -64,11 +64,11 @@ class SubMenu extends Component {
     };
 
     render() {
-        const { name, link, onLinkClick } = this.props;
+        const { name, link, icon, onLinkClick } = this.props;
         return (
             <li className={"sub-menu " + this.getItemClass(link)}>
                 <Link to={link} className="sub-menu-link" onClick={onLinkClick}>
-                    <FormattedMessage id={name} />
+                    <span className={icon}></span><FormattedMessage id={name} />
                 </Link>
             </li>
         );
@@ -204,6 +204,7 @@ class Navigator extends Component {
                                                         active={isMenuHasSubMenuActive}
                                                         name={menu.name}
                                                         link={menu.link}
+                                                        icon={menu.icon}
                                                         hasSubMenu={menu.subMenus}
                                                         isOpen={isSubMenuOpen}
                                                         onClick={() => this.toggle(groupIndex, menuIndex)}
@@ -214,6 +215,7 @@ class Navigator extends Component {
                                                                 key={subMenuIndex}
                                                                 name={subMenu.name}
                                                                 link={subMenu.link}
+                                                                icon={menu.icon}
                                                                 onClick={this.closeOtherExpand}
                                                                 onLinkClick={onLinkClick}
                                                             />
