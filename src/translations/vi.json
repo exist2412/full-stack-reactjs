@@ -31,6 +31,10 @@
             "system-administrator": {
                 "header": "Bảng điều khiển",
                 "user-manage": "Quản lý người dùng",
+                "doctor-manage": "Quản lý bác sĩ",
+                "clinic": "Phòng khám",
+                "specialist": "Chuyên khoa",
+                "blog": "Bài viết",
                 "product-manage": "Quản lý gói",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },

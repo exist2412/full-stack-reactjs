@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/UserManage';
+import DoctorManage from '../containers/System/DoctorManage';
 import ProductManage from '../containers/System/ProductManage';
 import Dashboard from '../containers/System/Dashboard';
 import Header from '../containers/Header/Header';
@@ -18,6 +19,7 @@ class System extends Component {
                             <Switch>
                                 <Route path="/system/dashboard" component={Dashboard} />
                                 <Route path="/system/user-manage" component={UserManage} />
+                                <Route path="/system/doctor-manage" component={DoctorManage} />
                                 <Route path="/system/user-redux" component={ProductManage} />
                                 <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                             </Switch>

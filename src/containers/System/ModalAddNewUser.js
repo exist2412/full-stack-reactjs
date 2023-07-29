@@ -80,6 +80,7 @@ class ModalAddNewUser extends Component {
     }
 
     render() {
+        //console.log(this.props.genders)
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} toggle={() => { this.toggle()} } size='lg' centered>

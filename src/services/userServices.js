@@ -8,6 +8,10 @@ const get_all_users = (inputId) => {
     return axios.get(`/api/get-list-users?id=${inputId}`);
 }
 
+const get_all_permissions = (inputType) => {
+    return axios.get(`/api/get-permission?type=${inputType}`);
+}
+
 const createUser = (data) => {
     return axios.post('/api/create-user', 
         {
@@ -40,4 +44,4 @@ const handleDeleteUser = (userId) => {
     );
 }
 
-export { handleLoginApi, get_all_users, createUser, handleDeleteUser, editUser }
+export { handleLoginApi, get_all_users, createUser, handleDeleteUser, editUser, get_all_permissions }

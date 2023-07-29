@@ -31,6 +31,10 @@
             "system-administrator": {
                 "header": "Dashboard",
                 "user-manage": "User manage",
+                "doctor-manage": "Doctor manage",
+                "clinic": "Clinic",
+                "specialist": "Specialist",
+                "blog": "Blog",
                 "product-manage": "Package manage",
                 "register-package-group-or-account": "Register service package for group/account"
             },

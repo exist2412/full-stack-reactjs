@@ -15,25 +15,25 @@ class Login extends Component {
             isShow: false,
         }
     }
-
+    // Control user name
     handleUsername = (event) => {
         let UserName = event.target.value;
         this.setState({
             username: UserName
         })
     }
-
+    // Control password
     handlePassword = (event) => {
         let PassWord = event.target.value;
         this.setState({
             password: PassWord
         })
     }
-
+    // Call api login and return data
     handleLogin = async () => {
         try {
             let data = await handleLoginApi(this.state.username, this.state.password);
-            console.log(data)
+            // console.log(data)
             if (data && data.data.errCode !== 0) {
                 this.setState({
                     errMassage: data.data.errMessage
@@ -50,7 +50,7 @@ class Login extends Component {
         }
         
     }
-
+    // Show password
     handleShowHidePassWord = () => {
         this.setState({
             isShow: !this.state.isShow
@@ -98,6 +98,7 @@ class Login extends Component {
     }
 }
 
+// Redux
 const mapStateToProps = state => {
     return {
         language: state.app.language

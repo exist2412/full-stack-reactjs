@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import "./user-manager.scss";
-import { get_all_users, get_all_permissions, createUser, handleDeleteUser, editUser } from '../../services/userServices';
+import { get_all_users, createUser, handleDeleteUser, editUser } from '../../services/userServices';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import ModalAddNewUser from './ModalAddNewUser';
@@ -11,13 +11,12 @@ import ModalEditUser from './ModalEditUser';
 import { add } from 'lodash';
 import { emitter } from '../../utils/emitter';
 
-class UserManage extends Component {
+class DoctorManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             arrUsers: [],
-            arrGender: [],
             isOpen: false,
             modalDelete: false,
             modalEdit: false,
@@ -25,14 +24,9 @@ class UserManage extends Component {
             id: ''
         }
     }
-    
+
     async componentDidMount() {
-        try {
-            await this.getAllPermissions_Gender();
-            await this.getAllUsers();
-        } catch (e) {
-            console.log(e)
-        }
+        await this.getAllUsers();
     }
 
     getAllUsers = async () => {
@@ -40,15 +34,6 @@ class UserManage extends Component {
         if (res && res.status === 200) {
             this.setState({
                 arrUsers: res.data.listUsers
-            })
-        }
-    }
-
-    getAllPermissions_Gender = async () => {
-        let res = await get_all_permissions('gender');
-        if (res && res.status === 200) {
-            this.setState({
-                arrGender: res.data.data
             })
         }
     }
@@ -188,8 +173,7 @@ class UserManage extends Component {
                     key={'modalNewUser'} 
                     createNewUser={this.AddNewUser} 
                     isOpen={this.state.isOpen} 
-                    toggle={this.toggleAddUserModal}
-                    genders={this.state.arrGender}
+                    toggle={this.toggleAddUserModal} 
                 />
                 <ModalDeleteUser
                     key={'modalDeleteUser'} 
@@ -207,7 +191,7 @@ class UserManage extends Component {
                         updateUser={this.updateUser}
                     />
                 }
-                <table id="userManager" className="tableCustom">
+                <table id="DoctorManager" className="tableCustom">
                     <thead>
                         <tr>
                             <th>Email</th>
@@ -254,4 +238,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorManage);
